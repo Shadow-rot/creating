@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shold Gaming — Telegram Bot Dev & Web Learner</title>
+  <meta name="description" content="Portfolio of Shold Gaming — Telegram Bot Developer & Web Learner from Kolkata, India." />
+
+  <!-- Google Fonts: Syne (display) + Poppins (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       SCROLL PROGRESS BAR
+  ═══════════════════════════════════════ -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <header id="navbar">
+    <nav class="nav-container">
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="Home">
+        <span class="logo-bracket">&lt;</span>SG<span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#about"   class="nav-link">About</a></li>
+        <li><a href="#skills"  class="nav-link">Skills</a></li>
+        <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+        <li><a href="#projects"class="nav-link">Projects</a></li>
+        <li><a href="#stats"   class="nav-link">Stats</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right controls -->
+      <div class="nav-controls">
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle light/dark mode" title="Toggle theme">
+          <span class="theme-icon">☀</span>
+        </button>
+        <!-- Hamburger -->
+        <button id="menu-toggle" class="icon-btn hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <ul id="mobile-menu" class="mobile-links" role="list" aria-hidden="true">
+      <li><a href="#about"    class="nav-link" tabindex="-1">About</a></li>
+      <li><a href="#skills"   class="nav-link" tabindex="-1">Skills</a></li>
+      <li><a href="#roadmap"  class="nav-link" tabindex="-1">Roadmap</a></li>
+      <li><a href="#projects" class="nav-link" tabindex="-1">Projects</a></li>
+      <li><a href="#stats"    class="nav-link" tabindex="-1">Stats</a></li>
+      <li><a href="#contact"  class="nav-link" tabindex="-1">Contact</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- ═══════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════ -->
+    <section id="hero" aria-label="Hero">
+      <!-- Animated background orbs -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-lines"></div>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-greeting reveal-up">Hello, World 👋</p>
+        <h1 class="hero-name reveal-up" style="--delay:.1s">
+          <span class="glow-text">Shold Gaming</span>
+        </h1>
+        <!-- Typing subtitle -->
+        <p class="hero-subtitle reveal-up" style="--delay:.2s">
+          <span id="typed-text"></span><span class="cursor" aria-hidden="true">|</span>
+        </p>
+        <p class="hero-location reveal-up" style="--delay:.3s">
+          <span class="pin">📍</span> Kolkata, India
+        </p>
+        <!-- CTAs -->
+        <div class="hero-ctas reveal-up" style="--delay:.4s">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact"  class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <a href="#about" class="scroll-hint" aria-label="Scroll down">
+        <span class="scroll-arrow" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════ -->
+    <section id="about" class="section" aria-label="About me">
+      <div class="container">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-grid">
+          <!-- Avatar -->
+          <div class="about-avatar fade-in" style="--delay:.1s">
+            <div class="avatar-frame">
+              <div class="avatar-inner">SG</div>
+              <div class="avatar-ring" aria-hidden="true"></div>
+            </div>
+          </div>
+          <!-- Bio -->
+          <div class="about-text fade-in" style="--delay:.2s">
+            <p>Hey! I'm <strong>Shold Gaming</strong> — a passionate <strong>Telegram Bot Developer</strong> and aspiring full-stack web developer based in Kolkata, India.</p>
+            <p>I love automating things and building useful bots for the Telegram ecosystem using <strong>Go</strong> and <strong>Python</strong>. I'm currently levelling up my web skills with HTML, CSS, and JavaScript to create awesome web experiences.</p>
+            <p>When I'm not coding, you'll find me exploring new tech, gaming, or experimenting with open-source projects.</p>
+            <div class="about-tags">
+              <span class="tag">🤖 Bot Developer</span>
+              <span class="tag">🐹 Go Enthusiast</span>
+              <span class="tag">🐍 Python Lover</span>
+              <span class="tag">🌐 Web Learner</span>
+              <span class="tag">🎮 Gamer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SKILLS SECTION
+    ═══════════════════════════════════════ -->
+    <section id="skills" class="section section-alt" aria-label="Skills">
+      <div class="container">
+        <h2 class="section-title fade-in">Skills & Tech</h2>
+        <p class="section-sub fade-in">Technologies I work with</p>
+
+        <div class="skills-grid">
+          <!-- Skill Card: Go -->
+          <div class="skill-card fade-in" style="--delay:.05s">
+            <div class="skill-header">
+              <span class="skill-icon">🐹</span>
+              <span class="skill-name">Go (Golang)</span>
+              <span class="skill-pct">82%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="82"></div>
+            </div>
+          </div>
+
+          <!-- Python -->
+          <div class="skill-card fade-in" style="--delay:.1s">
+            <div class="skill-header">
+              <span class="skill-icon">🐍</span>
+              <span class="skill-name">Python</span>
+              <span class="skill-pct">88%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="88"></div>
+            </div>
+          </div>
+
+          <!-- Telegram Bot API -->
+          <div class="skill-card fade-in" style="--delay:.15s">
+            <div class="skill-header">
+              <span class="skill-icon">📡</span>
+              <span class="skill-name">Telegram Bot API</span>
+              <span class="skill-pct">90%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="90"></div>
+            </div>
+          </div>
+
+          <!-- HTML -->
+          <div class="skill-card fade-in" style="--delay:.2s">
+            <div class="skill-header">
+              <span class="skill-icon">🧱</span>
+              <span class="skill-name">HTML</span>
+              <span class="skill-pct">75%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="75"></div>
+            </div>
+          </div>
+
+          <!-- CSS -->
+          <div class="skill-card fade-in" style="--delay:.25s">
+            <div class="skill-header">
+              <span class="skill-icon">🎨</span>
+              <span class="skill-name">CSS</span>
+              <span class="skill-pct">70%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="70"></div>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="skill-card fade-in" style="--delay:.3s">
+            <div class="skill-header">
+              <span class="skill-icon">⚡</span>
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-pct">60%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill" data-width="60"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LEARNING ROADMAP
+    ═══════════════════════════════════════ -->
+    <section id="roadmap" class="section" aria-label="Learning roadmap">
+      <div class="container">
+        <h2 class="section-title fade-in">Learning Roadmap</h2>
+        <p class="section-sub fade-in">Track my progress — your checks persist in your browser!</p>
+
+        <div class="roadmap-grid">
+          <!-- Phase 1 -->
+          <div class="roadmap-phase fade-in" style="--delay:.05s">
+            <h3 class="phase-title"><span class="phase-num">01</span> Web Foundations</h3>
+            <ul class="roadmap-list" role="list">
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="html-basics" /><span class="checkmark"></span>HTML5 Semantics</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="css-basics" /><span class="checkmark"></span>CSS3 & Flexbox</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="css-grid" /><span class="checkmark"></span>CSS Grid Layout</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="responsive" /><span class="checkmark"></span>Responsive Design</label></li>
+            </ul>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="roadmap-phase fade-in" style="--delay:.1s">
+            <h3 class="phase-title"><span class="phase-num">02</span> JavaScript</h3>
+            <ul class="roadmap-list" role="list">
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="js-basics" /><span class="checkmark"></span>JS Fundamentals</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="dom" /><span class="checkmark"></span>DOM Manipulation</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="async" /><span class="checkmark"></span>Async / Fetch API</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="es6" /><span class="checkmark"></span>ES6+ Features</label></li>
+            </ul>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="roadmap-phase fade-in" style="--delay:.15s">
+            <h3 class="phase-title"><span class="phase-num">03</span> Go & Bots</h3>
+            <ul class="roadmap-list" role="list">
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="go-basics" /><span class="checkmark"></span>Go Syntax & Types</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="go-goroutines" /><span class="checkmark"></span>Goroutines & Channels</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="tgbot-go" /><span class="checkmark"></span>Telegram Bot (Go)</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="tgbot-py" /><span class="checkmark"></span>Telegram Bot (Python)</label></li>
+            </ul>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="roadmap-phase fade-in" style="--delay:.2s">
+            <h3 class="phase-title"><span class="phase-num">04</span> Advanced Goals</h3>
+            <ul class="roadmap-list" role="list">
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="backend" /><span class="checkmark"></span>Backend APIs (Go/Python)</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="db" /><span class="checkmark"></span>Databases (PostgreSQL)</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="deploy" /><span class="checkmark"></span>Deployment & CI/CD</label></li>
+              <li class="roadmap-item"><label class="roadmap-check"><input type="checkbox" data-id="opensource" /><span class="checkmark"></span>Open-Source Contributions</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Overall progress bar -->
+        <div class="roadmap-progress-wrap fade-in" style="--delay:.25s">
+          <div class="roadmap-progress-label">
+            <span>Overall Progress</span>
+            <span id="roadmap-pct">0%</span>
+          </div>
+          <div class="roadmap-progress-track">
+            <div id="roadmap-progress-fill" class="roadmap-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PROJECTS SECTION
+    ═══════════════════════════════════════ -->
+    <section id="projects" class="section section-alt" aria-label="Projects">
+      <div class="container">
+        <h2 class="section-title fade-in">Projects</h2>
+        <p class="section-sub fade-in">Things I've built and shipped</p>
+
+        <div class="projects-grid">
+
+          <!-- Project 1 -->
+          <article class="project-card fade-in" style="--delay:.05s">
+            <div class="project-accent" aria-hidden="true"></div>
+            <div class="project-header">
+              <span class="project-icon">🤖</span>
+              <div class="project-links">
+                <a href="#" class="proj-link" aria-label="GitHub link" title="GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-name">AutoReply Bot</h3>
+            <p class="project-desc">A smart Telegram bot written in Go that auto-replies to messages based on keyword triggers, supports inline keyboards, and logs interactions to a database.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Go</span>
+              <span class="stack-tag">Telegram API</span>
+              <span class="stack-tag">PostgreSQL</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card fade-in" style="--delay:.1s">
+            <div class="project-accent" aria-hidden="true"></div>
+            <div class="project-header">
+              <span class="project-icon">📊</span>
+              <div class="project-links">
+                <a href="#" class="proj-link" aria-label="GitHub link" title="GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-name">Stats Tracker Bot</h3>
+            <p class="project-desc">Python-powered Telegram bot that tracks group activity stats, generates daily reports, and sends beautiful charts directly to Telegram chats.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Matplotlib</span>
+              <span class="stack-tag">SQLite</span>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card fade-in" style="--delay:.15s">
+            <div class="project-accent" aria-hidden="true"></div>
+            <div class="project-header">
+              <span class="project-icon">🌐</span>
+              <div class="project-links">
+                <a href="#" class="proj-link" aria-label="GitHub link" title="GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-name">Dev Portfolio v1</h3>
+            <p class="project-desc">This very portfolio — built with pure HTML, CSS, and Vanilla JS. Features glassmorphism design, dark/light mode, scroll animations, and localStorage persistence.</p>
+            <div class="project-stack">
+              <span class="stack-tag">HTML</span>
+              <span class="stack-tag">CSS</span>
+              <span class="stack-tag">JavaScript</span>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card fade-in" style="--delay:.2s">
+            <div class="project-accent" aria-hidden="true"></div>
+            <div class="project-header">
+              <span class="project-icon">🛡️</span>
+              <div class="project-links">
+                <a href="#" class="proj-link" aria-label="GitHub link" title="GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-name">Group Guard Bot</h3>
+            <p class="project-desc">A moderation bot for Telegram groups. Handles spam detection, user verification via CAPTCHA, warning system, and automatic ban/kick with customizable rules.</p>
+            <div class="project-stack">
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">Telegram API</span>
+              <span class="stack-tag">Redis</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         STATS SECTION
+    ═══════════════════════════════════════ -->
+    <section id="stats" class="section" aria-label="Developer stats">
+      <div class="container">
+        <h2 class="section-title fade-in">Developer Stats</h2>
+        <p class="section-sub fade-in">By the numbers</p>
+
+        <div class="stats-grid">
+          <div class="stat-card fade-in" style="--delay:.05s">
+            <div class="stat-glow" aria-hidden="true"></div>
+            <span class="stat-icon">🚀</span>
+            <span class="stat-number" data-target="12">0</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-card fade-in" style="--delay:.1s">
+            <div class="stat-glow" aria-hidden="true"></div>
+            <span class="stat-icon">🤖</span>
+            <span class="stat-number" data-target="8">0</span>
+            <span class="stat-label">Bots Built</span>
+          </div>
+          <div class="stat-card fade-in" style="--delay:.15s">
+            <div class="stat-glow" aria-hidden="true"></div>
+            <span class="stat-icon">💻</span>
+            <span class="stat-number" data-target="640">0</span>
+            <span class="stat-label">GitHub Commits</span>
+          </div>
+          <div class="stat-card fade-in" style="--delay:.2s">
+            <div class="stat-glow" aria-hidden="true"></div>
+            <span class="stat-icon">☕</span>
+            <span class="stat-number" data-target="500">0</span>
+            <span class="stat-label">Cups of Chai</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT SECTION
+    ═══════════════════════════════════════ -->
+    <section id="contact" class="section section-alt" aria-label="Contact">
+      <div class="container">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <p class="section-sub fade-in">Open to collaborations, projects, and chai ☕</p>
+
+        <div class="contact-wrap">
+          <!-- Social cards -->
+          <div class="contact-links fade-in" style="--delay:.1s">
+
+            <a href="https://t.me/I_shadwoo" target="_blank" rel="noopener noreferrer" class="contact-card">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Telegram</p>
+                <p class="contact-card-val">@I_shadwoo</p>
+              </div>
+              <span class="contact-arrow">↗</span>
+            </a>
+
+            <a href="mailto:looktouhid@gmail.com" class="contact-card">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <div>
+                <p class="contact-card-label">Email</p>
+                <p class="contact-card-val">looktouhid@gmail.com</p>
+              </div>
+              <span class="contact-arrow">↗</span>
+            </a>
+
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="contact-card">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </div>
+              <div>
+                <p class="contact-card-label">GitHub</p>
+                <p class="contact-card-val">View my repos</p>
+              </div>
+              <span class="contact-arrow">↗</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-glow" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 <span class="accent">Shold Gaming</span>. Built with ❤️ &amp; ☕ in Kolkata.</p>
+      <p class="footer-stack">Made with pure HTML · CSS · JavaScript</p>
+    </div>
+  </footer>
+
+  <!-- Back-to-top button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
