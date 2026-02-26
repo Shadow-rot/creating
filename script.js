@@ -1,51 +1,107 @@
-/* ═══════════════════════════════════════════════════════
-   SHOLD GAMING — PORTFOLIO JAVASCRIPT
-   Pure Vanilla JS, no frameworks
-   Author: Claude for Shold Gaming
-═══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   SHADWO PORTFOLIO — script.js
+   Includes: 3D Triangle Background (SCSS → Vanilla JS port),
+   Typing animation, Scroll effects, Counters, Roadmap, Theme
+   Author: Claude for Shadwo / Shadow-rot
+═══════════════════════════════════════════════════════════ */
 
-/* ───────────────────────────────────────────────────────
-   DOM HELPERS
-─────────────────────────────────────────────────────── */
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => [...document.querySelectorAll(s)];
+/* ─── HELPERS ─────────────────────────────────────────── */
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 
-/* ───────────────────────────────────────────────────────
-   1. SCROLL PROGRESS BAR
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   1. 3D TRIANGLE BACKGROUND
+   Ports the original SCSS @for loop to pure JavaScript.
+   Generates 200 colorful triangles that fly from deep z
+   toward the viewer in an infinite loop.
+───────────────────────────────────────────────────────── */
+function initTriangleBackground() {
+  const wrap  = $('#tri-wrap');
+  if (!wrap) return;
+
+  const TOTAL    = 200;  // number of triangles
+  const DURATION = 10;   // seconds per cycle
+
+  // Utility: random int between 1 and max (inclusive)
+  const rnd = max => Math.floor(Math.random() * max) + 1;
+
+  for (let i = 1; i <= TOTAL; i++) {
+    const size    = rnd(50);           // 1–50px  (matches $size: random(50)*1px)
+    const hue     = rnd(360);          // 0–360 hue
+    const rotateZ = rnd(360);          // initial Z rotation
+    const tx      = rnd(1000);         // translate X (0–1000px) in keyframe
+    const ty      = rnd(1000);         // translate Y (0–1000px) in keyframe
+    const delay   = i * -(DURATION / TOTAL); // negative delay staggers them
+
+    const div = document.createElement('div');
+    div.className = 'tri';
+
+    // Equilateral-ish CSS triangle via border trick
+    div.style.cssText = `
+      border-top:   ${size}px solid hsl(${hue}, 100%, 55%);
+      border-right: ${size}px solid transparent;
+      border-left:  ${size}px solid transparent;
+      margin-left:  -${size / 2}px;
+      margin-top:   -${size / 2}px;
+      filter: grayscale(0.5) brightness(0.85);
+      animation: triAnim${i} ${DURATION}s ${delay}s infinite linear;
+      opacity: 0;
+    `;
+
+    // Inject a unique keyframe for this triangle
+    // Mirrors: 0% { opacity:1; transform: rotate($r*1.5) translate3d(rx,ry,1000px) scale(1); }
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes triAnim${i} {
+        0% {
+          opacity: 0.9;
+          transform: rotate(${rotateZ * 1.5}deg) translate3d(${tx}px, ${ty}px, 1000px) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: rotate(${rotateZ}deg) translate3d(0, 0, -1500px) scale(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    wrap.appendChild(div);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. SCROLL PROGRESS BAR
+───────────────────────────────────────────────────────── */
 function initScrollProgress() {
   const bar = $('#scroll-progress');
   if (!bar) return;
 
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = `${(scrolled / max) * 100}%`;
+    bar.style.width = `${(window.scrollY / max) * 100}%`;
   }, { passive: true });
 }
 
-/* ───────────────────────────────────────────────────────
-   2. STICKY NAV — add .scrolled class on scroll
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   3. STICKY NAVBAR
+───────────────────────────────────────────────────────── */
 function initNavbar() {
   const nav = $('#navbar');
   if (!nav) return;
-
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 }
 
-/* ───────────────────────────────────────────────────────
-   3. MOBILE HAMBURGER MENU
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   4. MOBILE HAMBURGER
+───────────────────────────────────────────────────────── */
 function initMobileMenu() {
   const btn   = $('#menu-toggle');
   const menu  = $('#mobile-menu');
   const links = $$('#mobile-menu .nav-link');
   if (!btn || !menu) return;
 
-  function closeMenu() {
+  function close() {
     btn.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
     menu.classList.remove('open');
@@ -61,318 +117,258 @@ function initMobileMenu() {
     links.forEach(l => l.setAttribute('tabindex', isOpen ? '0' : '-1'));
   });
 
-  // Close on link click
-  links.forEach(link => link.addEventListener('click', closeMenu));
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!$('#navbar').contains(e.target)) closeMenu();
+  links.forEach(l => l.addEventListener('click', close));
+  document.addEventListener('click', e => {
+    if (!$('#navbar').contains(e.target)) close();
   });
 }
 
-/* ───────────────────────────────────────────────────────
-   4. SMOOTH SCROLL — all anchor links
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   5. SMOOTH SCROLL
+───────────────────────────────────────────────────────── */
 function initSmoothScroll() {
   const navH = parseInt(
     getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10
   ) || 70;
 
   $$('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', e => {
       const target = $(link.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - navH;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - navH,
+        behavior: 'smooth'
+      });
     });
   });
 }
 
-/* ───────────────────────────────────────────────────────
-   5. TYPING ANIMATION
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   6. TYPING ANIMATION
+───────────────────────────────────────────────────────── */
 function initTyping() {
   const el = $('#typed-text');
   if (!el) return;
 
   const phrases = [
-    'Telegram Bot Developer',
-    'Go & Python Enthusiast',
-    'Web Learner 🌐',
-    'Open Source Builder',
-    'Automation Geek 🤖',
+    'Automation Artist ⚡',
+    'Founder of Siya Bots 💠',
+    'Python Bot Developer 🐍',
+    'Building the Future 🚀',
+    'Code. Automate. Create.',
+    'Shadow Dev Team Core Dev',
   ];
 
-  let phraseIdx = 0;
-  let charIdx   = 0;
-  let deleting  = false;
-  let pausing   = false;
-
-  const PAUSE_END   = 1800; // ms pause after full phrase
-  const PAUSE_START = 500;  // ms pause before typing next
-  const TYPE_SPEED  = 70;
-  const DEL_SPEED   = 35;
+  let pi = 0, ci = 0, del = false, pausing = false;
+  const TYPE = 70, DEL = 35, PAUSE_END = 1800, PAUSE_START = 450;
 
   function tick() {
-    const phrase = phrases[phraseIdx];
-
-    if (pausing) return; // setTimeout will call resume
-
-    if (!deleting) {
-      // Typing
-      el.textContent = phrase.slice(0, ++charIdx);
-      if (charIdx === phrase.length) {
-        // Pause at end
+    if (pausing) return;
+    const phrase = phrases[pi];
+    if (!del) {
+      el.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) {
         pausing = true;
-        setTimeout(() => { pausing = false; deleting = true; tick(); }, PAUSE_END);
+        setTimeout(() => { pausing = false; del = true; tick(); }, PAUSE_END);
         return;
       }
-      setTimeout(tick, TYPE_SPEED);
+      setTimeout(tick, TYPE);
     } else {
-      // Deleting
-      el.textContent = phrase.slice(0, --charIdx);
-      if (charIdx === 0) {
-        deleting = false;
-        phraseIdx = (phraseIdx + 1) % phrases.length;
-        // Pause before next
+      el.textContent = phrase.slice(0, --ci);
+      if (ci === 0) {
+        del = false;
+        pi  = (pi + 1) % phrases.length;
         pausing = true;
         setTimeout(() => { pausing = false; tick(); }, PAUSE_START);
         return;
       }
-      setTimeout(tick, DEL_SPEED);
+      setTimeout(tick, DEL);
     }
   }
-
   tick();
 }
 
-/* ───────────────────────────────────────────────────────
-   6. FADE-IN ON SCROLL (IntersectionObserver)
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   7. FADE-IN ON SCROLL (IntersectionObserver)
+───────────────────────────────────────────────────────── */
 function initFadeIn() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // animate once
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
-
-  $$('.fade-in').forEach(el => observer.observe(el));
-}
-
-/* ───────────────────────────────────────────────────────
-   7. SKILL BARS ANIMATION
-─────────────────────────────────────────────────────── */
-function initSkillBars() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const fill = entry.target;
-          const targetWidth = fill.getAttribute('data-width');
-          // Small delay for visual delight
-          setTimeout(() => {
-            fill.style.width = `${targetWidth}%`;
-          }, 200);
-          observer.unobserve(fill);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  $$('.skill-bar-fill').forEach(bar => observer.observe(bar));
-}
-
-/* ───────────────────────────────────────────────────────
-   8. ANIMATED COUNTERS
-─────────────────────────────────────────────────────── */
-function initCounters() {
-  const DURATION = 1800; // ms
-  const EASE = (t) => 1 - Math.pow(1 - t, 3); // ease-out-cubic
-
-  function animateCounter(el) {
-    const target = parseInt(el.getAttribute('data-target'), 10);
-    const start  = performance.now();
-
-    function step(now) {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / DURATION, 1);
-      const eased    = EASE(progress);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target; // ensure exact final value
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  $$('.stat-number[data-target]').forEach(el => observer.observe(el));
-}
-
-/* ───────────────────────────────────────────────────────
-   9. ROADMAP — localStorage persistence
-─────────────────────────────────────────────────────── */
-function initRoadmap() {
-  const STORAGE_KEY = 'sg_roadmap_progress';
-  const checkboxes  = $$('.roadmap-check input[type="checkbox"]');
-  const pctLabel    = $('#roadmap-pct');
-  const progressBar = $('#roadmap-progress-fill');
-
-  if (!checkboxes.length) return;
-
-  // Load saved state
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-
-  checkboxes.forEach(cb => {
-    const id = cb.getAttribute('data-id');
-    if (saved[id]) cb.checked = true;
-  });
-
-  // Update overall progress display
-  function updateProgress() {
-    const total   = checkboxes.length;
-    const checked = checkboxes.filter(cb => cb.checked).length;
-    const pct     = Math.round((checked / total) * 100);
-
-    if (pctLabel) pctLabel.textContent = `${pct}%`;
-    if (progressBar) progressBar.style.width = `${pct}%`;
-  }
-
-  updateProgress();
-
-  // Save on change
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const state = {};
-      checkboxes.forEach(c => { state[c.getAttribute('data-id')] = c.checked; });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      updateProgress();
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
     });
-  });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  $$('.fade-in').forEach(el => obs.observe(el));
 }
 
-/* ───────────────────────────────────────────────────────
-   10. DARK / LIGHT MODE TOGGLE
-─────────────────────────────────────────────────────── */
-function initThemeToggle() {
-  const STORAGE_KEY = 'sg_theme';
+/* ─────────────────────────────────────────────────────────
+   8. SKILL BARS
+───────────────────────────────────────────────────────── */
+function initSkillBars() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        setTimeout(() => { fill.style.width = `${fill.dataset.width}%`; }, 200);
+        obs.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  $$('.skill-bar-fill').forEach(b => obs.observe(b));
+}
+
+/* ─────────────────────────────────────────────────────────
+   9. ANIMATED COUNTERS
+───────────────────────────────────────────────────────── */
+function initCounters() {
+  const DURATION = 1800;
+  const ease     = t => 1 - Math.pow(1 - t, 3); // ease-out-cubic
+
+  function animate(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const start  = performance.now();
+    (function step(now) {
+      const p = Math.min((now - start) / DURATION, 1);
+      el.textContent = Math.round(ease(p) * target);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    })(start);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  $$('.stat-number[data-target]').forEach(el => obs.observe(el));
+}
+
+/* ─────────────────────────────────────────────────────────
+   10. ROADMAP — localStorage persistence
+───────────────────────────────────────────────────────── */
+function initRoadmap() {
+  const KEY  = 'shadwo_roadmap';
+  const cbs  = $$('.roadmap-check input[type="checkbox"]');
+  const pct  = $('#roadmap-pct');
+  const fill = $('#roadmap-progress-fill');
+  if (!cbs.length) return;
+
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  cbs.forEach(cb => { if (saved[cb.dataset.id]) cb.checked = true; });
+
+  function update() {
+    const checked = cbs.filter(c => c.checked).length;
+    const p = Math.round((checked / cbs.length) * 100);
+    if (pct)  pct.textContent  = `${p}%`;
+    if (fill) fill.style.width = `${p}%`;
+  }
+
+  update();
+
+  cbs.forEach(cb => cb.addEventListener('change', () => {
+    const state = {};
+    cbs.forEach(c => { state[c.dataset.id] = c.checked; });
+    localStorage.setItem(KEY, JSON.stringify(state));
+    update();
+  }));
+}
+
+/* ─────────────────────────────────────────────────────────
+   11. DARK / LIGHT MODE
+───────────────────────────────────────────────────────── */
+function initTheme() {
+  const KEY  = 'shadwo_theme';
   const btn  = $('#theme-toggle');
   const icon = btn?.querySelector('.theme-icon');
   const html = document.documentElement;
-
   if (!btn) return;
 
-  // Icons for each mode
-  const ICONS = { dark: '☀', light: '🌙' };
+  const ICONS = { dark:'☀', light:'🌙' };
 
-  function applyTheme(theme) {
+  function apply(theme) {
     html.setAttribute('data-theme', theme);
     if (icon) icon.textContent = ICONS[theme];
-    btn.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.title = theme === 'dark' ? 'Light mode' : 'Dark mode';
   }
 
-  // Load saved or default
-  const savedTheme = localStorage.getItem(STORAGE_KEY) || 'dark';
-  applyTheme(savedTheme);
+  apply(localStorage.getItem(KEY) || 'dark');
 
   btn.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next    = current === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
-    localStorage.setItem(STORAGE_KEY, next);
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+    localStorage.setItem(KEY, next);
   });
 }
 
-/* ───────────────────────────────────────────────────────
-   11. BACK-TO-TOP BUTTON
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   12. BACK TO TOP
+───────────────────────────────────────────────────────── */
 function initBackToTop() {
   const btn = $('#back-to-top');
   if (!btn) return;
-
   window.addEventListener('scroll', () => {
     btn.classList.toggle('visible', window.scrollY > 500);
   }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  btn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 }
 
-/* ───────────────────────────────────────────────────────
-   12. ACTIVE NAV LINK ON SCROLL
-─────────────────────────────────────────────────────── */
-function initActiveNavLink() {
-  const sections  = $$('section[id]');
-  const navLinks  = $$('.nav-link');
+/* ─────────────────────────────────────────────────────────
+   13. ACTIVE NAV HIGHLIGHT ON SCROLL
+───────────────────────────────────────────────────────── */
+function initActiveNav() {
+  const sections = $$('section[id]');
+  const links    = $$('.nav-link');
+  if (!sections.length) return;
 
-  if (!sections.length || !navLinks.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.toggle(
+          'active', l.getAttribute('href') === `#${entry.target.id}`
+        ));
+      }
+    });
+  }, { rootMargin:'-40% 0px -40% 0px', threshold:0 });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.classList.toggle(
-              'active',
-              link.getAttribute('href') === `#${entry.target.id}`
-            );
-          });
-        }
-      });
-    },
-    { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-  );
-
-  sections.forEach(s => observer.observe(s));
+  sections.forEach(s => obs.observe(s));
 }
 
-/* ───────────────────────────────────────────────────────
-   13. PROJECT CARD TILT EFFECT (subtle)
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   14. PROJECT CARD TILT EFFECT
+───────────────────────────────────────────────────────── */
 function initCardTilt() {
   $$('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect   = card.getBoundingClientRect();
-      const cx     = rect.left + rect.width / 2;
-      const cy     = rect.top  + rect.height / 2;
-      const dx     = (e.clientX - cx) / (rect.width  / 2);
-      const dy     = (e.clientY - cy) / (rect.height / 2);
-      const rx     =  dy * -6; // rotate around X axis
-      const ry     =  dx *  6; // rotate around Y axis
-      card.style.transform = `translateY(-8px) scale(1.01) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    card.addEventListener('mousemove', e => {
+      const r  = card.getBoundingClientRect();
+      const dx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+      const dy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+      card.style.transform =
+        `translateY(-8px) scale(1.01) rotateX(${dy * -5}deg) rotateY(${dx * 5}deg)`;
     });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 }
 
-/* ───────────────────────────────────────────────────────
-   INIT — run everything when DOM is ready
-─────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   INIT — Run everything on DOMContentLoaded
+───────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();       // Theme must go first (avoids flash)
+  // Theme first to avoid flash
+  initTheme();
+
+  // Background (can take a moment to inject 200 keyframes)
+  initTriangleBackground();
+
+  // UI
   initScrollProgress();
   initNavbar();
   initMobileMenu();
@@ -383,28 +379,31 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initRoadmap();
   initBackToTop();
-  initActiveNavLink();
+  initActiveNav();
   initCardTilt();
 
+  // Dev console watermark
   console.log(
-    '%c🚀 Shold Gaming Portfolio %c v1.0',
-    'background:#38bdf8;color:#0f172a;font-weight:bold;padding:4px 8px;border-radius:4px 0 0 4px;',
-    'background:#1e293b;color:#38bdf8;padding:4px 8px;border-radius:0 4px 4px 0;'
+    '%c💠 Shadwo%c Portfolio v2.0 — shadow-rot.github.io ',
+    'background:#00f5ff;color:#000;font-weight:900;padding:5px 10px;border-radius:4px 0 0 4px;font-family:monospace;',
+    'background:#0a141e;color:#00f5ff;padding:5px 10px;border-radius:0 4px 4px 0;font-family:monospace;'
   );
 });
 
-/* ───────────────────────────────────────────────────────
-   HANDLE REDUCED MOTION (accessibility)
-─────────────────────────────────────────────────────── */
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-if (prefersReducedMotion.matches) {
-  // Make all fade-in elements immediately visible
+/* ─────────────────────────────────────────────────────────
+   ACCESSIBILITY — Reduced Motion
+───────────────────────────────────────────────────────── */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.addEventListener('DOMContentLoaded', () => {
+    // Hide triangle background entirely
+    const bg = $('#tri-bg');
+    if (bg) bg.style.display = 'none';
+
+    // Instantly show animated elements
     $$('.fade-in, .reveal-up').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.animation = 'none';
+      el.style.opacity    = '1';
+      el.style.transform  = 'none';
+      el.style.animation  = 'none';
       el.style.transition = 'none';
     });
   });
