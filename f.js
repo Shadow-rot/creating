@@ -215,12 +215,12 @@ console.log(typeof product)
 // }
 
 
-// let i = 0;
-// while (i < 200) {
-//     console.log("hello", i);
-//     i %= 19;
-// }
-
+let i = 0;
+  while (i < 200) {
+     console.log("hello", i);
+     i %= 19;
+    }
+console.log("done", i);
 
 // let correct = 10;
 // let guess = parseInt(prompt("Guess a number between 1 and 20: "));
@@ -266,8 +266,190 @@ console.log(typeof product)
 // let sex = str + muth;
 // console.log(sex);
 
-let username = prompt("enter yor name: ");
-let name = "@";
-let be = name + username;
+// let username = prompt("enter yor name: ");
+// let name = "@";
+// let be = name + username;
 
-console.log(be,username.length);
+// console.log(be,username.length);
+
+// let price = [100, 200, 300, 400, 500];
+// let total = 0
+
+// for (let i of price) {
+//     total += i;
+//     console.log(`10%${i / 10}`, total);
+// }
+// for (let value of price) {
+//     console.log(value / 10 , total += value);
+// }
+// console.log("final total is: ", total);
+
+// let price = [150, 250, 350, 450, 550];
+// let total = 0;
+
+// // for (let i of price) {
+// //     total += i;
+// //     console.log(`15% of ${i} is ${i * 0.15}`, total);
+// // }   
+
+// for (let value of price) {
+//    let offer = value / 10;
+//     console.log(offer);
+//     price[total] = price[total] - offer;
+//     total++;
+// }
+// console.log("final total is: ", total);
+
+
+// let price = [300, 700, 800, 900, 1000];
+
+// for (let i = 0; i < price.length; i++) {
+//     let be = price[i] / 10;
+//     console.log(price[i] - be);
+// }
+
+// let game;
+// let answer = 10;
+// attemt = 3;
+
+// while (game != answer && attemt > 0) {
+//     game = prompt(`guess you have only ${attemt}: `);
+//     if (game == answer) {
+//         console.log("you guessed it right ", game);
+//     }
+//     attemt--;
+//     if (attemt == 0) {
+//         console.log("no attempts left");
+//     }
+//     if (game != answer && attemt > 0) {
+//         console.log(`this is not ${game}`);
+//     }
+// }
+
+
+// let chos;
+// let cho;
+// let chose;
+
+
+// // while (true) {
+// //     chos = Number(prompt("enter your first num: "));
+//     cho = Number(prompt("enter your second num: "));
+//     chose =dc prompt("enter operation (+, -, *, /): ");
+
+//     switch (chose) {
+//         case '+':
+//             console.log("result is: ", Number(chos) + Number(cho));
+//             break;
+//         case '-':
+//             console.log("result is: ", Number(chos) - Number(cho));
+//             break;
+//         case '*':
+//             console.log("result is: ", Number(chos) * Number(cho));
+//             break;
+//         case '/':
+//             console.log("result is: ", Number(chos) / Number(cho));
+//             break;
+//         case 'exit':
+//             console.log("exiting the calculator. Goodbye!");
+//             exit();
+//         default:
+//             console.log("invalid operation");
+//     }}
+
+
+// const vowel = (str) => {
+//     let count = 0;
+//     const vowels = 'aeiouAEIOU';
+//     for (let char of str) {
+//         if (vowels.includes(char)) {
+//             count++;
+//         }   
+//     }
+//     return count;
+// }   
+// console.log(vowel("Hello World")); // Output: 3
+// console.log(vowel("JavaScript is fun")); // Output: 5
+
+// let weather;
+// weather = prompt("Enter the current weather (sunny, rainy, cloudy, snowy): ");
+
+
+// switch (weather) {
+//     case 'sunny':
+//         console.log("It's a bright and sunny day!");
+//         break;  
+//     case 'rainy':
+//         console.log("Don't forget your umbrella. It's raining!");
+//         break;
+//     case 'cloudy':
+//         console.log("It's a bit gloomy with clouds.");
+//         break;
+//     case 'snowy':
+//         console.log("Time for some snow fun!");
+//         break;
+//     default:
+//         console.log("Weather condition unknown.");
+// }   
+// console.log("Stay prepared for the weather!");
+
+
+// function calculator(n) {
+//     switch (n) {
+//         case 'add':
+//             return (a, b) => a + b;
+//         case 'subtract':
+//             return (a, b) => a - b;
+//         case 'multiply':
+//             return (a, b) => a * b;
+//         case 'divide':
+//             return (a, b) => a / b;
+//         default:
+//             return null;
+//     }
+// }
+
+// const add = calculator('add');
+// const subtract = calculator('subtract');
+// const multiply = calculator('multiply');
+// const divide = calculator('divide');
+// console.log("Addition: ", add(10, 5)); // Output: 15
+// console.log("Subtraction: ", subtract(10, 5)); // Output: 5
+// console.log("Multiplication: ", multiply(10, 5)); // Output: 50
+// console.log("Division: ", divide(10, 5)); // Output: 2  
+// const say = (multi) => {
+//     for (let i = 1; i <= multi; i++) {
+//         console.log("hello world", i);
+//     }
+
+// }
+// say(10);
+
+// const m = (a, b) => {
+//     return a * b;
+// }
+// // let val = m(5, 4);
+// // console.log("the multiplication is: ", val);
+// console.log("the multiplication is: ", m(5, 4));
+
+
+
+
+// let vow = (lol) => {
+//     let count = 0;
+//     const vowels = 'aeiouAEIOU';
+//     for (let char of lol) {
+//         if (vowels.includes(char)) {
+//             count++;
+//         }
+//     }
+//     return count;
+// }
+// console.log(vow("This is a sample string")); // Output: 6
+// console.log(vow("Another example here")); // Output: 8
+
+// const arr = [1, 2, 3, 4, 1000];
+// arr.forEach((num) => {
+//     console.log(num * num);
+// }
+// );  
