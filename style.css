@@ -10,17 +10,17 @@
 :root {
   --bg:         #000000;
   --bg-alt:     #080c18;
-  --surface:    rgba(10, 20, 40, 0.72);
-  --surface-2:  rgba(10, 20, 40, 0.92);
-  --border:     rgba(0, 245, 255, 0.18);
-  --accent:     #00f5ff;   /* Orbitron cyan — matches README */
-  --accent-2:   #818cf8;
+  --surface:    rgba(0, 0, 0, 0.72);
+  --surface-2:  rgba(15, 13, 13, 0.92);
+  --border:     rgba(0, 0, 0, 0.18);
+  --accent:     #222929;   /* Orbitron cyan — matches README */
+  --accent-2:   #030303;
   --accent-3:   #facc15;
   --text:       #f1f5f9;
   --text-muted: #94a3b8;
 
-  --glow:       0 0 24px rgba(0,245,255,.4), 0 0 70px rgba(0,245,255,.12);
-  --glow-sm:    0 0 12px rgba(0,245,255,.35);
+  --glow:       0 0 24px rgba(10, 11, 11, 0.4), 0 0 70px rgba(0,245,255,.12);
+  --glow-sm:    0 0 12px rgba(17, 18, 18, 0.35);
 
   --font-display: 'Orbitron', 'Poppins', sans-serif;
   --font-body:    'Poppins', sans-serif;
@@ -40,11 +40,11 @@
   --bg-alt:     #e0e8ff;
   --surface:    rgba(255,255,255,0.75);
   --surface-2:  rgba(255,255,255,0.95);
-  --border:     rgba(0,245,255,.28);
+  --border:     rgba(8, 8, 8, 0.28);
   --text:       #0f172a;
-  --text-muted: #475569;
-  --glow:       0 0 20px rgba(0,245,255,.25);
-  --glow-sm:    0 0 10px rgba(0,245,255,.2);
+  --text-muted: #040404;
+  --glow:       0 0 20px rgba(24, 25, 25, 0.25);
+  --glow-sm:    0 0 10px rgba(21, 21, 21, 0.2);
 }
 
 /* ───────────────────────────────────────────────────
@@ -52,7 +52,7 @@
 ─────────────────────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-html { scroll-behavior:smooth; font-size:16px; }
+html { scroll-behavior:smooth; font-size:10px; }
 
 body {
   background: var(--bg);
@@ -139,7 +139,7 @@ ul  { list-style:none; }
 
 #navbar.scrolled {
   background: rgba(0,0,0,.95);
-  box-shadow: 0 4px 30px rgba(0,245,255,.08);
+  box-shadow: 0 4px 30px rgba(10, 11, 11, 0.08);
 }
 
 .nav-container {
